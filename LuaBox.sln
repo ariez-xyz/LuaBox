@@ -1,0 +1,51 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31424.327
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "LuaBox", "LuaBox.vcxproj", "{0C5610DB-36B3-489D-A64B-3A525DD2C484}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|ARM = Debug|ARM
+		Debug|ARM64 = Debug|ARM64
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|ARM = Release|ARM
+		Release|ARM64 = Release|ARM64
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|ARM.ActiveCfg = Debug|ARM
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|ARM.Build.0 = Debug|ARM
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|ARM.Deploy.0 = Debug|ARM
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|ARM64.ActiveCfg = Debug|ARM64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|ARM64.Build.0 = Debug|ARM64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|ARM64.Deploy.0 = Debug|ARM64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|x64.ActiveCfg = Debug|x64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|x64.Build.0 = Debug|x64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|x64.Deploy.0 = Debug|x64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|x86.ActiveCfg = Debug|Win32
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|x86.Build.0 = Debug|Win32
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Debug|x86.Deploy.0 = Debug|Win32
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|ARM.ActiveCfg = Release|ARM
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|ARM.Build.0 = Release|ARM
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|ARM.Deploy.0 = Release|ARM
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|ARM64.ActiveCfg = Release|ARM64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|ARM64.Build.0 = Release|ARM64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|ARM64.Deploy.0 = Release|ARM64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|x64.ActiveCfg = Release|x64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|x64.Build.0 = Release|x64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|x64.Deploy.0 = Release|x64
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|x86.ActiveCfg = Release|Win32
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|x86.Build.0 = Release|Win32
+		{0C5610DB-36B3-489D-A64B-3A525DD2C484}.Release|x86.Deploy.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {2F7202F2-914C-4C8A-9750-53C13C46E9C4}
+	EndGlobalSection
+EndGlobal
