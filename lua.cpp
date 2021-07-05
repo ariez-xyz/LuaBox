@@ -554,6 +554,17 @@ static int loadline (lua_State *L) {
   return status;
 }
 
+static int loadline(lua_State* L, char* line) {
+    int status;
+    lua_settop(L, 0);
+    if (!pushline(L, 1))
+        return -1;  /* no input */
+    if ((status = addreturn(L)) != LUA_OK)  /* 'return ...' did not work? */
+        status = multiline(L);  /* try as command, maybe with continuation lines */
+    lua_remove(L, 1);  /* remove line from the stack */
+    lua_assert(lua_gettop(L) == 1);
+    return status;
+}
 
 /*
 ** Prints (calling the Lua 'print' function) any values on the stack

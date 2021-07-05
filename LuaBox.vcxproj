@@ -167,6 +167,7 @@
     </ClCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClInclude Include="InterpreterState.h" />
     <ClInclude Include="lapi.h" />
     <ClInclude Include="lauxlib.h" />
     <ClInclude Include="lcode.h" />
@@ -229,6 +230,7 @@
     <ClCompile Include="App.xaml.cpp">
       <DependentUpon>App.xaml</DependentUpon>
     </ClCompile>
+    <ClCompile Include="InterpreterState.cpp" />
     <ClCompile Include="lapi.cpp" />
     <ClCompile Include="lauxlib.cpp" />
     <ClCompile Include="lbaselib.cpp" />

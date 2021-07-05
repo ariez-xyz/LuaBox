@@ -117,6 +117,9 @@ LUALIB_API void (luaL_traceback) (lua_State *L, lua_State *L1,
 LUALIB_API void (luaL_requiref) (lua_State *L, const char *modname,
                                  lua_CFunction openf, int glb);
 
+void lua_writestring_uwp(const char* s);
+void lua_writestring_uwp(const char* s, size_t l);
+
 /*
 ** ===============================================================
 ** some useful macros
@@ -250,7 +253,10 @@ typedef struct luaL_Stream {
 /* print a string */
 #if !defined(lua_writestring)
 //#define lua_writestring(s,l)   fwrite((s), sizeof(char), (l), stdout)
-#define lua_writestring(s,l)   OutputDebugStringA(s)
+#include "InterpreterState.h"
+//#define lua_writestring(s,l)   OutputDebugStringA(s)
+void lua_writestring_uwp(const char* s, size_t l);
+#define lua_writestring(s,l)   lua_writestring_uwp(s,l)
 #endif
 
 /* print a newline and flush the output */

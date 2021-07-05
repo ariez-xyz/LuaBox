@@ -44,7 +44,16 @@
 #define LEVELS1	10	/* size of the first part of the stack */
 #define LEVELS2	11	/* size of the second part of the stack */
 
-
+void lua_writestring_uwp(const char* s) {
+    lua_writestring_uwp(s, 0);
+}
+void lua_writestring_uwp(const char* s, size_t l) {
+    
+    int wchars_num = MultiByteToWideChar(CP_UTF8, 0, s, -1, NULL, 0);
+    wchar_t* wstr = new wchar_t[wchars_num];
+    MultiByteToWideChar(CP_UTF8, 0, s, -1, wstr, wchars_num);
+    luaState.result = Platform::String::Concat(luaState.result, ref new Platform::String(wstr, wchars_num));
+}
 
 /*
 ** Search for 'objidx' in table at index -1. ('objidx' must be an

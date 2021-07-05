@@ -48,6 +48,7 @@
     <ClCompile Include="lutf8lib.cpp" />
     <ClCompile Include="lvm.cpp" />
     <ClCompile Include="lzio.cpp" />
+    <ClCompile Include="InterpreterState.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="pch.h" />
@@ -79,6 +80,7 @@
     <ClInclude Include="lundump.h" />
     <ClInclude Include="lvm.h" />
     <ClInclude Include="lzio.h" />
+    <ClInclude Include="InterpreterState.h" />
   </ItemGroup>
   <ItemGroup>
     <Image Include="Assets\LockScreenLogo.scale-200.png">

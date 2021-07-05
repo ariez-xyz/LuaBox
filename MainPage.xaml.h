@@ -6,6 +6,8 @@
 #pragma once
 
 #include "MainPage.g.h"
+#include "InterpreterState.cpp"
+#include <string>
 
 namespace LuaBox
 {
@@ -19,5 +21,7 @@ namespace LuaBox
 
 	private:
 		void Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e);
+
+		LuaState state;
 	};
 }
