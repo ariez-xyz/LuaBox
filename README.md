@@ -4,5 +4,11 @@ A Lua VM inside an UWP app, plus some basic UI. If you ever wanted to, you can n
 
 ![Screenshot](screenshot.png)
 
-This was a just-for-fun weekend project; I've never written any code for Microsoft platforms nor much C++ before, so the code is basically a mess. However it hacking around in Lua's source code to make it work inside UWP was a decent bit of fun.
+This was a just-for-fun weekend project; I've never written any code for Microsoft platforms nor much C++ before, so the code is basically a mess. However hacking around in Lua's source code to make it work inside UWP was a decent bit of fun.
+
+## To Do
+
+* Extend the Lua library with some UWP functionality
+	* Text-to-speech (for example, `uwp.say("Hi!")`)
+* Up arrow to browse command history
 
