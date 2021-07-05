@@ -43,19 +43,7 @@ void LuaBox::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml:
 	sprintf(line, "%ws", wchars);
 	int error;
 
-
-	lua_writestring_uwp("> ");
-	lua_writestring_uwp(line);
-	lua_writestring_uwp("\n");
-
-	error = luaL_loadstring(L, line) || lua_pcall(L, 0, 0, 0);
-
-	if (error) {
-		lua_writestring_uwp("LUA ERROR:\n");
-		lua_writestring_uwp(lua_tostring(L, -1));
-		lua_writestring_uwp("\n");
-		lua_pop(L, 1);
-	}
+	doREPL(L, line);
 
 	ResultLabel->Text = luaState.result;
 }

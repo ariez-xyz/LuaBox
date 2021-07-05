@@ -108,8 +108,17 @@ static void print_usage (const char *badoption) {
 ** (if present)
 */
 static void l_message (const char *pname, const char *msg) {
-  if (pname) lua_writestringerror("%s: ", pname);
-  lua_writestringerror("%s\n", msg);
+  //if (pname) lua_writestringerror("%s: ", pname);
+  //lua_writestringerror("%s\n", msg);
+    if (pname) {
+        lua_writestring_uwp(pname);
+    }
+    else {
+        lua_writestring_uwp("lua");
+    }
+    lua_writestring_uwp(" error : ");
+    lua_writestring_uwp(msg);
+    lua_writestring_uwp("\n");
 }
 
 
@@ -477,14 +486,15 @@ static int incomplete (lua_State *L, int status) {
 /*
 ** Prompt the user, read a line, and push it into the Lua stack.
 */
-static int pushline (lua_State *L, int firstline) {
-  char buffer[LUA_MAXINPUT];
-  char *b = buffer;
+static int pushline (lua_State *L, int firstline, char* buffer) {
   size_t l;
+  char* b = buffer;
+
   const char *prmt = get_prompt(L, firstline);
-  int readstatus = lua_readline(L, b, prmt);
-  if (readstatus == 0)
-    return 0;  /* no input (prompt will be popped by caller) */
+  lua_writestring_uwp(prmt);
+  lua_writestring_uwp(buffer);
+  lua_writestring_uwp("\n");
+
   lua_pop(L, 1);  /* remove prompt */
   l = strlen(b);
   if (l > 0 && b[l-1] == '\n')  /* line ends with newline? */
@@ -520,21 +530,50 @@ static int addreturn (lua_State *L) {
 /*
 ** Read multiple lines until a complete Lua statement
 */
+int inIncompleteStatement = 0;
 static int multiline (lua_State *L) {
-  for (;;) {  /* repeat until gets a complete statement */
     size_t len;
+
     const char *line = lua_tolstring(L, 1, &len);  /* get what it has */
     int status = luaL_loadbuffer(L, line, len, "=stdin");  /* try it */
-    if (!incomplete(L, status) || !pushline(L, 0)) {
-      lua_saveline(L, line);  /* keep history */
-      return status;  /* cannot or should not try to add continuation line */
+
+    if (incomplete(L, status)) {
+        inIncompleteStatement = 1;
+        return LUA_OK;
+    } else {
+        inIncompleteStatement = 0;
+        lua_saveline(L, line);  /* keep history */
+        return status;  /* cannot or should not try to add continuation line */
     }
-    lua_pushliteral(L, "\n");  /* add newline... */
-    lua_insert(L, -2);  /* ...between the two lines */
-    lua_concat(L, 3);  /* join them */
-  }
 }
 
+static void dumpstack(lua_State* L) {
+    int top = lua_gettop(L);
+    char s[2560];
+    for (int i = 1; i <= top; i++) {
+        sprintf(s, "%d\t%s\t", i, luaL_typename(L, i));
+        OutputDebugStringA(s);
+
+        switch (lua_type(L, i)) {
+        case LUA_TNUMBER:
+            sprintf(s, "%g\n", lua_tonumber(L, i));
+            break;
+        case LUA_TSTRING:
+            sprintf(s, "%s\n", lua_tostring(L, i));
+            break;
+        case LUA_TBOOLEAN:
+            sprintf(s, "%s\n", (lua_toboolean(L, i) ? "true" : "false"));
+            break;
+        case LUA_TNIL:
+            sprintf(s, "%s\n", "nil");
+            break;
+        default:
+            sprintf(s, "%p\n", lua_topointer(L, i));
+            break;
+        }
+        OutputDebugStringA(s);
+    }
+}
 
 /*
 ** Read a line and try to load (compile) it first as an expression (by
@@ -542,28 +581,29 @@ static int multiline (lua_State *L) {
 ** the final status of load/call with the resulting function (if any)
 ** in the top of the stack.
 */
-static int loadline (lua_State *L) {
-  int status;
-  lua_settop(L, 0);
-  if (!pushline(L, 1))
-    return -1;  /* no input */
-  if ((status = addreturn(L)) != LUA_OK)  /* 'return ...' did not work? */
-    status = multiline(L);  /* try as command, maybe with continuation lines */
-  lua_remove(L, 1);  /* remove line from the stack */
-  lua_assert(lua_gettop(L) == 1);
-  return status;
-}
-
 static int loadline(lua_State* L, char* line) {
     int status;
-    lua_settop(L, 0);
-    if (!pushline(L, 1))
+
+    if (!pushline(L, !inIncompleteStatement, line))
         return -1;  /* no input */
-    if ((status = addreturn(L)) != LUA_OK)  /* 'return ...' did not work? */
-        status = multiline(L);  /* try as command, maybe with continuation lines */
-    lua_remove(L, 1);  /* remove line from the stack */
-    lua_assert(lua_gettop(L) == 1);
-    return status;
+
+    if (inIncompleteStatement) { // if we've previously read an incomplete chunk:
+        lua_pushliteral(L, "\n");  /* add newline... */
+        lua_insert(L, -2);  /* ...between the two lines */
+        lua_concat(L, 3);  /* join the chunk with the new line */
+        return multiline(L); // try executing multiline
+    }
+
+    else {
+        if ((status = addreturn(L)) != LUA_OK)  /* 'return ...' did not work? */
+            status = multiline(L);  /* try as command, maybe with continuation lines */
+
+        if (!inIncompleteStatement) // if line was executed successfully OR unrecoverable syntax error occurred:
+            lua_remove(L, 1);  /* remove line from the stack */
+
+        lua_assert(lua_gettop(L) == 1);
+        return status;
+    }
 }
 
 /*
@@ -586,21 +626,31 @@ static void l_print (lua_State *L) {
 ** Do the REPL: repeatedly read (load) a line, evaluate (call) it, and
 ** print any results.
 */
-static void doREPL (lua_State *L) {
+void doREPL (lua_State *L, char* line) {
   int status;
-  const char *oldprogname = progname;
-  progname = NULL;  /* no 'progname' on errors in interactive mode */
-  lua_initreadline(L);
-  while ((status = loadline(L)) != -1) {
-    if (status == LUA_OK)
-      status = docall(L, 0, LUA_MULTRET);
-    if (status == LUA_OK) l_print(L);
-    else report(L, status);
+
+  //lua_initreadline(L);
+
+  if ((status = loadline(L, line)) != -1) {
+      if (!inIncompleteStatement) {
+          if (status == LUA_OK)
+              status = docall(L, 0, LUA_MULTRET);
+
+          if (status == LUA_OK)
+              l_print(L);
+          else
+              report(L, status);
+      }
   }
-  lua_settop(L, 0);  /* clear stack */
-  lua_writeline();
-  progname = oldprogname;
+
+  else {
+      lua_settop(L, 0);  /* clear stack */
+      lua_writeline();
+      lua_writestring_uwp("Error reading input.");
+  }
 }
+
+static void doREPL(lua_State* L) { OutputDebugStringA("useless stub so I don't have to change all of the code"); }
 
 /* }================================================================== */
 

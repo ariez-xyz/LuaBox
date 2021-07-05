@@ -146,6 +146,8 @@ typedef void (*lua_WarnFunction) (void *ud, const char *msg, int tocont);
 */
 extern const char lua_ident[];
 
+// CUSTOM
+void doREPL(lua_State* L, char* line);
 
 /*
 ** state manipulation
