@@ -37,6 +37,17 @@ MainPage::MainPage()
 
 void LuaBox::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml::RoutedEventArgs^ e)
 {	
+	this->runREPL();
+}
+
+
+void LuaBox::MainPage::InputLine_KeyDown(Platform::Object^ sender, Windows::UI::Xaml::Input::KeyRoutedEventArgs^ e)
+{
+	if (e->Key == Windows::System::VirtualKey::Enter)
+		this->runREPL();
+}
+
+void LuaBox::MainPage::runREPL() {
 	Platform::String^ input = InputLine->Text;
 	wchar_t const* wchars = input->Data();
 	char line[2560];
@@ -46,4 +57,6 @@ void LuaBox::MainPage::Button_Click(Platform::Object^ sender, Windows::UI::Xaml:
 	doREPL(L, line);
 
 	ResultLabel->Text = luaState.result;
+	InputLine->Text = "";
 }
+

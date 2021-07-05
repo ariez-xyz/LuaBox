@@ -8,17 +8,21 @@
     mc:Ignorable="d"
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
-    <RelativePanel>
-        <StackPanel x:Name="Customer" Margin="20">
-            <TextBox x:Name="InputLine" Text="Brah" /><!--Content-->
-        </StackPanel>
-        <StackPanel x:Name="Associate" Margin="20" RelativePanel.RightOf="Customer">
-            <TextBlock x:Name="ResultLabel"  Text="bre" /><!--Content-->
-        </StackPanel>
-        <StackPanel x:Name="Save" Orientation="Horizontal" RelativePanel.Below="Customer">
-            <!--Save and Cancel buttons-->
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="32"/>
+        </Grid.RowDefinitions>
 
-            <Button Content="Button" VerticalAlignment="Top" Click="Button_Click"/>
-        </StackPanel>
-    </RelativePanel>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="25"/>
+            <ColumnDefinition Width="6*"/>
+            <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+
+        <TextBlock x:Name="ResultLabel" Grid.Row="0" Grid.Column="1"/>
+        <TextBlock x:Name="PromptLabel" Text=">" FontSize="20" Grid.Row="1" Grid.Column="0"/>
+        <TextBox x:Name="InputLine" PlaceholderText="Enter command" Grid.Row="1" Grid.Column="1" KeyDown="InputLine_KeyDown"/>
+        <Button Content="Enter" VerticalAlignment="Top" Click="Button_Click" HorizontalAlignment="Stretch" Grid.Row="1" Grid.Column="2"/>
+    </Grid>
 </Page>
