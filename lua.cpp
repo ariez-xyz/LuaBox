@@ -547,6 +547,7 @@ static int multiline (lua_State *L) {
     }
 }
 
+// for debugging
 static void dumpstack(lua_State* L) {
     int top = lua_gettop(L);
     char s[2560];
