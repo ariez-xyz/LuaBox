@@ -7,15 +7,15 @@
   IgnorableNamespaces="uap mp">
 
   <Identity
-    Name="333ade0e-39e3-4a53-a96e-a3462d09dcea"
-    Publisher="CN=Admin"
-    Version="1.0.0.0" />
+    Name="22011AriezLabs.LuaBox"
+    Publisher="CN=4ADAF58D-FBC7-4445-A32E-A2E96D8F0A25"
+    Version="1.0.2.0" />
 
-  <mp:PhoneIdentity PhoneProductId="333ade0e-39e3-4a53-a96e-a3462d09dcea" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
+  <mp:PhoneIdentity PhoneProductId="d9aa3187-7dd8-47bc-a4c1-ebddeea6afd5" PhonePublisherId="00000000-0000-0000-0000-000000000000"/>
 
   <Properties>
     <DisplayName>LuaBox</DisplayName>
-    <PublisherDisplayName>Admin</PublisherDisplayName>
+    <PublisherDisplayName>AriezLabs</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
 
@@ -37,7 +37,7 @@
         Square44x44Logo="Assets\Square44x44Logo.png"
         Description="LuaBox"
         BackgroundColor="transparent">
-        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png"/>
+        <uap:DefaultTile Wide310x150Logo="Assets\Wide310x150Logo.png" Square71x71Logo="Assets\SmallTile.png" Square310x310Logo="Assets\LargeTile.png"/>
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
     </Application>

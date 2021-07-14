@@ -1,6 +1,6 @@
 # LuaBox
 
-A Lua VM inside an UWP app, plus some basic UI. 
+A Lua VM + REPL in an UWP app!
 
 If you ever wanted to, you can now run Lua 5.3 on your Xbox Series X/S.
 
@@ -16,6 +16,7 @@ This was a just-for-fun weekend project; I've never written any code for Microso
 * Up arrow to browse command history
 * Graphics library/apps/...
   * Can LÖVE2D work?
+* LuaJIT
 
 
 ## Motivation
