@@ -2,7 +2,7 @@
 
 A Lua VM + REPL in an UWP app!
 
-If you ever wanted to, you can now run Lua 5.3 on your Xbox Series X/S.
+If you ever wanted to, you can now run Lua 5.3 on your Xbox Series X/S. Get it from the [Microsoft Store](https://www.microsoft.com/en-us/p/luabox/9npr957hth9q)
 
 ![Screenshot](screenshot.png)
 
@@ -15,7 +15,7 @@ This was a just-for-fun weekend project; I've never written any code for Microso
 	* Text-to-speech (for example, `uwp.say("Hi!")`)
 * Up arrow to browse command history
 * Graphics library/apps/...
-  * Can LÖVE2D work?
+	* Can LÖVE2D work?
 * LuaJIT
 
 
