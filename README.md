@@ -1,8 +1,10 @@
 # LuaBox
 
+<a href='//www.microsoft.com/store/apps/9npr957hth9q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' style='width: 284px; height: 104px;'/></a>
+
 A Lua VM + REPL in an UWP app!
 
-If you ever wanted to, you can now run Lua 5.3 on your Xbox Series X/S. Get it from the [Microsoft Store](https://www.microsoft.com/en-us/p/luabox/9npr957hth9q)
+If you ever wanted to, you can now run Lua 5.3 on your Xbox Series X/S.
 
 ![Screenshot](screenshot.png)
 
