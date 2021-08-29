@@ -1,6 +1,6 @@
 # LuaBox
 
-<a href='//www.microsoft.com/store/apps/9npr957hth9q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' style='width: 284px; height: 104px;'/></a>
+<a href='//www.microsoft.com/store/apps/9npr957hth9q?cid=storebadge&ocid=badge'><img src='https://developer.microsoft.com/store/badges/images/English_get-it-from-MS.png' alt='English badge' style='width: 284px; height: 104px;' width="284" height="104"/></a>
 
 A Lua VM + REPL in an UWP app!
 
